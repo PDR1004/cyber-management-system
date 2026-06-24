@@ -11,3 +11,7 @@ class ConsoleResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class ConsoleUpdate(BaseModel):
+    name: str
+    status: str
