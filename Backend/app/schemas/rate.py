@@ -12,3 +12,8 @@ class RateResponse (BaseModel):
 
     class Config:
         from_attributes = True
+
+class RateUpdate (BaseModel):
+    players_count: int
+    price_per_hour: float
+

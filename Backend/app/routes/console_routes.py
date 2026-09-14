@@ -1,7 +1,6 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from fastapi import HTTPException
 
 from app.database.dependencies import get_db
 
@@ -13,7 +12,7 @@ router = APIRouter(
     tags=["Consoles"]
 )
 
-@router.post("/",response_model=console_schemas.ConsoleResponse)
+@router.post("/",response_model=console_schemas.ConsoleResponse, status_code = status.HTTP_201_CREATED)
 def create_new_console(
     console: console_schemas.ConsoleCreate,
     db: Session = Depends(get_db)
@@ -35,7 +34,7 @@ def read_console(
 
     if console is None:
         raise HTTPException(
-            status_code=404, 
+            status_code= status.HTTP_404_NOT_FOUND, 
             detail="Console not found")
     return console
 
@@ -49,7 +48,7 @@ def update_console_by_id(
 
     if console is None:
         raise HTTPException(
-            status_code=404,
+            status_code= status.HTTP_404_NOT_FOUND,
             detail="Console not found"
         )
     return console
@@ -63,7 +62,7 @@ def delete_console_by_id(
     
     if console is None:
         raise HTTPException(
-            status_code=404,
+            status_code= status.HTTP_404_NOT_FOUND,
             detail="Console not found"
         )
     return console

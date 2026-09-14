@@ -50,7 +50,7 @@ def update_product(db: Session, product_id: int, product_data: ProductUpdate):
     return product
 
 def delete_product(db: Session, product_id: int):
-    product = db.query(Product).fiter(
+    product = db.query(Product).filter(
         Product.id == product_id
     ).first()
 
@@ -58,6 +58,6 @@ def delete_product(db: Session, product_id: int):
         product.active = False
         db.commit()
         db.refresh(product)
-    return True 
+    return product 
 
 

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 from app.database.dependencies import get_db
@@ -12,20 +12,20 @@ router = APIRouter(
     tags=["Sessions"]
 )
 
-@router.post("/start", response_model=SessionResponse)
+@router.post("/start", response_model=SessionResponse, status_code=status.HTTP_201_CREATED)
 def create_new_session(
     session_data: SessionCreate,
     db: Session = Depends(get_db)
 ):
-    session = start_session(db, session_data)
 
-    if session is None:
+    try:
+        return start_session(db, session_data)
+
+    except ValueError as error:
         raise HTTPException(
-            status_code = 400,
-            detail = "No fue posible iniciar la sesión"
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(error)
         )
-    
-    return session
 
 @router.post ("/{session_id}/end", response_model=SessionResponse)
 def finish_session(session_id: int, db: Session = Depends(get_db)):
@@ -33,7 +33,7 @@ def finish_session(session_id: int, db: Session = Depends(get_db)):
 
     if session is None:
         raise HTTPException(
-            status_code = 404,
+            status_code = status.HTTP_404_NOT_FOUND,
             detail = "Session not found"
         )
     return session
@@ -43,5 +43,5 @@ def read_sessions (db: Session = Depends(get_db)):
     return get_sessions(db)
 
 @router.get ("/active/", response_model=List[SessionResponse])
-def read_sessions (db: Session = Depends(get_db)):
+def read_active_sessions (db: Session = Depends(get_db)):
     return get_sessions_active(db)

@@ -1,4 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean
+from sqlalchemy.orm import relationship
+
 from app.database.connection import Base
 
 class Product(Base): 
@@ -10,4 +12,9 @@ class Product(Base):
     stock = Column(Integer, default=0)
     category = Column(String)
     active = Column(Boolean, default=True)
+
+    sale_details = relationship(
+        "SaleDetail",
+        back_populates="product"
+    )
 

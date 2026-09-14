@@ -18,14 +18,11 @@ def start_session(db:Session, session_data: SessionCreate):
 
     #"Verifico que exista"
     if console is None:
-        return None
+        raise ValueError("Console not found")
 
     #"Verifico disponibilidad"
     if console.status != "Disponible":
-        raise HTTPException(
-            status_code=400,
-            detail="La consola se encuentra ocupada"
-        )
+        raise ValueError("Console is not available")
     
     #Buscar tarifa
     tarifa = db.query(Rate).filter(
@@ -34,10 +31,7 @@ def start_session(db:Session, session_data: SessionCreate):
     ).first()
 
     if tarifa is None:
-        raise HTTPException(
-            status_code=404,
-            detail="No existe una tarifa para esa cantidad de jugadores"
-        )
+        raise ValueError("No active rate found for this number of players")
 
     #Crear Session
     new_session = Session(
@@ -104,6 +98,19 @@ def get_sessions(db: Session):
 def get_sessions_active(db: Session):
     sessions = db.query(Session).filter(Session.active == True).all()
     return sessions
+
+def get_session_by_id (db: Session, session_id: int):
+    session = db.query(Session).filter(
+        Session.id == session_id
+    ).first()
+
+    if session is None:
+        return None
+    
+    return session
+
+
+
 
 
 

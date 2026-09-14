@@ -1,7 +1,6 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from fastapi import HTTPException
 
 from app.database.dependencies import get_db
 
@@ -17,7 +16,11 @@ router = APIRouter(
 )
 
 
-@router.post("/", response_model=ProductResponse)
+@router.post(
+    "/", 
+    response_model=ProductResponse,
+    status_code=status.HTTP_201_CREATED
+)
 def create_new_product(
     product: ProductCreate,
     db: Session = Depends(get_db)
@@ -40,7 +43,7 @@ def read_product_by_id(
 
     if product is None:
         raise HTTPException(
-            status_code=404, 
+            status_code=status.HTTP_404_NOT_FOUND, 
             detail="Product not found")
     return product
        
@@ -55,7 +58,7 @@ def update_product_by_id(
 
     if product is None:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail="Product not found"
         )
     return product
