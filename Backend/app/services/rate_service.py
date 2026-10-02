@@ -35,7 +35,7 @@ def update_rate (rate_id: int, rate_data: RateUpdate, db: Session):
     if rate is None:
         return None
 
-    rate.player_count = rate_data.players_count
+    rate.players_count = rate_data.players_count
     rate.price_per_hour = rate_data.price_per_hour
 
     db.commit()
