@@ -10,6 +10,7 @@ function Products() {
   const [category, setCategory] = useState("")
 
   const [editingProduct, setEditingProduct] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState(null)
 
   useEffect(() => {
     fetch("http://localhost:8000/products/")
@@ -62,7 +63,7 @@ function Products() {
   fetch(`http://localhost:8000/products/${id}`)
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      setSelectedProduct(data)
     })
   }
 
@@ -207,6 +208,24 @@ function Products() {
 
         </div>
       ))}
+
+      {selectedProduct && (
+        <div>
+          <h2>Detalle del producto</h2>
+
+          <p>ID: {selectedProduct.id}</p>
+          <p>Nombre: {selectedProduct.name}</p>
+          <p>Precio de compra: ${selectedProduct.purchase_price}</p>
+          <p>Precio de venta: ${selectedProduct.sale_price}</p>
+          <p>Stock: {selectedProduct.stock}</p>
+          <p>Categoría: {selectedProduct.category}</p>
+          <p>Estado: {selectedProduct.active ? "Activo" : "Inactivo"}</p>
+
+          <button onClick={() => setSelectedProduct(null)}>
+            Cerrar
+          </button>
+        </div>
+      )}
 
     </div>
   )

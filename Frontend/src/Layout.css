@@ -1,9 +1,15 @@
+
 .layout {
-    display: flex;
-    min-height: 100vh;
+  display: flex;
+  min-height: 100vh;
+  background-color: #f3f5f9;
 }
 
 .main-content {
-    flex: 1;
-    padding: 30px;
+  flex: 1;
+  min-width: 0;
+  padding: 32px;
+  background-color: #f3f5f9;
+  color: #17243a;
+  overflow-x: auto;
 }

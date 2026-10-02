@@ -7,12 +7,21 @@ function Sales() {
   const [quantity, setQuantity] = useState("")
   const [saleItems, setSaleItems] = useState([])
   const [message, setMessage] = useState("")
+  const [sales, setSales] = useState([])
+  const [selectedSale, setSelectedSale] = useState(null)
+  
 
   useEffect(() => {
     fetch("http://localhost:8000/products/")
       .then(response => response.json())
       .then(data => {
         setProducts(data)
+      })
+    
+    fetch("http://localhost:8000/sales/")
+      .then(response => response.json())
+      .then(data => {
+        setSales(data)
       })
   }, [])
 
@@ -105,6 +114,8 @@ function Sales() {
     .then(data => {
       console.log("Venta creada:", data)
 
+      setSales([...sales, data])
+
       setMessage("Venta creada exitosamente")
       setSaleItems([])
       setTimeout(() => {
@@ -118,6 +129,21 @@ function Sales() {
       setTimeout(() => {
         setMessage("")
       }, 3000)
+    })
+  }
+
+  const getSaleById = (id) => {
+  fetch(`http://localhost:8000/sales/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      setSelectedSale(data)
+    })
+  }
+
+  const formatDate = (date) => {
+    return new Date(date).toLocaleString("es-AR", {
+      dateStyle: "short",
+      timeStyle: "short"
     })
   }
 
@@ -182,7 +208,65 @@ function Sales() {
           Finalizar Venta
         </button>
       </div>  
-    </div>
-)}
+      <table>
+        <caption> Ventas </caption>
+        <thead>
+          <tr>
+            <th>Venta</th>
+            <th>Fecha</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sales
+          .map(sale => (
+          <tr key={sale.id}>
+            <td>{sale.id}</td>
+            <td>{formatDate(sale.sale_date)}</td>
+            <td>${sale.total}</td>
+            <td>
+              <button onClick={() => getSaleById(sale.id)}>
+                Ver Detalle
+              </button>
+            </td>
+          </tr>
+          ))}
+        </tbody>
+      </table>
 
+      {selectedSale && (
+        <div>
+          <h2>Detalle de venta #{selectedSale.id}</h2>
+
+          <p>
+            Fecha: {formatDate(selectedSale.sale_date)}
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {selectedSale.details.map(detail => (
+                <tr key={detail.id}>
+                  <td>{detail.product.name}</td>
+                  <td>{detail.quantity}</td>
+                  <td>{detail.unit_price}</td>
+                  <td>{detail.subtotal}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p>
+            <strong>Total: {selectedSale.total}</strong>
+          </p>
+        </div>
+      )}
+    </div>
+  )}
 export default Sales
