@@ -148,8 +148,11 @@ function Sales() {
   }
 
   return (
-    <div>
-      <h1>Ventas</h1>
+    <div className = "sales-page">
+      <div className = "page-header">
+        <h1>Ventas</h1>
+        <p>Creá y Administrá las ventas del Cyber</p>
+      </div>
 
       {message && <p>{message}</p>}
 
@@ -183,20 +186,35 @@ function Sales() {
         Agregar
       </button>
 
-      <div>
-        <h2>Detalle de la venta</h2>
-        {saleItems.map(item => (
-          <div key={item.product_id}>
-            <p>
-              {item.name} - Cantidad: {item.quantity} - Precio: ${item.subtotal}
-            </p>
+      <div className = "items-card">
+        <div className = "section-header">
+          <h2>Detalle de la venta</h2>
+          <span>{saleItems.length} lineas</span>
+        </div>
 
-            <button onClick={() => deleteItem(item.product_id)}>
-              Eliminar
-            </button>
+        <div className = "items-list">
+          {saleItems.map(item => (
+            <div className = "item-row" key={item.product_id}>
+              <div className = "item-name">
+                {item.name}
+              </div>
 
-          </div>
-        ))}
+              <div className = "item-quantity">
+                Cantidad: {item.quantity}
+              </div>
+
+              <div className = "item-price">
+                Precio: ${item.subtotal}
+              </div>
+
+              <div className="item-actions">
+                <button className = "btn-delete" onClick={() => deleteItem(item.product_id)}>
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
         <p>
           Total: $ 
           {saleItems.reduce(
@@ -208,6 +226,7 @@ function Sales() {
           Finalizar Venta
         </button>
       </div>  
+
       <table>
         <caption> Ventas </caption>
         <thead>

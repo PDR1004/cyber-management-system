@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import "./Products.css"
 
 function Products() {
 
@@ -143,87 +144,198 @@ function Products() {
   }
   
   return (
-    <div>
-      <h1>Productos</h1>
-        <form onSubmit={handleSubmit}>
+    <div className="products-page">
 
-          <input
-            type="text"
-            placeholder="Nombre"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+      <div className="page-header">
+        <div>
+          <h1>Productos</h1>
+          <p>Administrá los productos y el stock del cyber</p>
+        </div>
+      </div>
 
-          <input
-            type="number"
-            placeholder="Precio de compra"
-            value={purchasePrice}
-            onChange={(e) => setPurchasePrice(e.target.value)}
-          />
+      <div className="product-form-card">
+        <h2>
+          {editingProduct ? "Editar producto" : "Nuevo producto"}
+        </h2>
 
-          <input
-            type="number"
-            placeholder="Precio de venta"
-            value={salePrice}
-            onChange={(e) => setSalePrice(e.target.value)}
-          />
+        <form onSubmit={handleSubmit} className="product-form">
 
-          <input
-            type="number"
-            placeholder="Stock"
-            value={stock}
-            onChange={(e) => setStock(e.target.value)}
-          />
+          <div className="form-group">
+            <label>Nombre</label>
+            <input
+              type="text"
+              placeholder="Ej: Coca Cola"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
-          <input
-            type="text"
-            placeholder="Categoría"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          />
+          <div className="form-group">
+            <label>Precio de compra</label>
+            <input
+              type="number"
+              placeholder="Ej: 1000"
+              value={purchasePrice}
+              onChange={(e) => setPurchasePrice(e.target.value)}
+            />
+          </div>
 
-          <button type="submit">
+          <div className="form-group">
+            <label>Precio de venta</label>
+            <input
+              type="number"
+              placeholder="Ej: 1500"
+              value={salePrice}
+              onChange={(e) => setSalePrice(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Stock</label>
+            <input
+              type="number"
+              placeholder="Ej: 20"
+              value={stock}
+              onChange={(e) => setStock(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Categoría</label>
+            <input
+              type="text"
+              placeholder="Ej: Bebidas"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </div>
+
+          <button type="submit" className="btn-primary">
             {editingProduct ? "Guardar cambios" : "Crear producto"}
           </button>
-
         </form>
+      </div>
 
-      {products.map(product => (
-        <div key={product.id}>
-          <p>
-            {product.name} - ${product.sale_price}
-          </p>
+      <div className="products-card">
 
-          <button onClick={() => getProductById(product.id)}>
-            Ver
-          </button>
+        <div className="section-header">
+          <h2>Productos registrados</h2>
+          <span>{products.length} productos</span>
+        </div>
 
-          <button onClick={() => editProduct(product)}>
-            Editar
-          </button>
+        <div className="products-list">
 
-          <button onClick={() => deleteProduct(product.id)}>
-            Eliminar
-          </button>
+          {products.map(product => (
+            <div className="product-row" key={product.id}>
+
+              <div className="product-info">
+                <div className="product-name">
+                  {product.name}
+                </div>
+
+                <div className="product-category">
+                  {product.category}
+                </div>
+              </div>
+
+              <div className="product-stock">
+                <span>Stock</span>
+                <strong>{product.stock}</strong>
+              </div>
+
+              <div className="product-price">
+                ${product.sale_price}
+              </div>
+
+              <div className="product-actions">
+
+                <button
+                  className="btn-view"
+                  onClick={() => getProductById(product.id)}
+                >
+                  Ver
+                </button>
+
+                <button
+                  className="btn-edit"
+                  onClick={() => editProduct(product)}
+                >
+                  Editar
+                </button>
+
+                <button
+                  className="btn-delete"
+                  onClick={() => deleteProduct(product.id)}
+                >
+                  Eliminar
+                </button>
+
+              </div>
+
+            </div>
+          ))}
 
         </div>
-      ))}
+      </div>
 
       {selectedProduct && (
-        <div>
-          <h2>Detalle del producto</h2>
+        <div className="product-detail-card">
 
-          <p>ID: {selectedProduct.id}</p>
-          <p>Nombre: {selectedProduct.name}</p>
-          <p>Precio de compra: ${selectedProduct.purchase_price}</p>
-          <p>Precio de venta: ${selectedProduct.sale_price}</p>
-          <p>Stock: {selectedProduct.stock}</p>
-          <p>Categoría: {selectedProduct.category}</p>
-          <p>Estado: {selectedProduct.active ? "Activo" : "Inactivo"}</p>
+          <div className="detail-header">
+            <div>
+              <h2>Detalle del producto</h2>
+              <p>Información del producto seleccionado</p>
+            </div>
 
-          <button onClick={() => setSelectedProduct(null)}>
-            Cerrar
-          </button>
+            <button
+              className="btn-close"
+              onClick={() => setSelectedProduct(null)}
+            >
+              ×
+            </button>
+          </div>
+
+          <div className="detail-grid">
+
+            <div>
+              <span>ID</span>
+              <strong>{selectedProduct.id}</strong>
+            </div>
+
+            <div>
+              <span>Nombre</span>
+              <strong>{selectedProduct.name}</strong>
+            </div>
+
+            <div>
+              <span>Precio de compra</span>
+              <strong>${selectedProduct.purchase_price}</strong>
+            </div>
+
+            <div>
+              <span>Precio de venta</span>
+              <strong>${selectedProduct.sale_price}</strong>
+            </div>
+
+            <div>
+              <span>Stock</span>
+              <strong>{selectedProduct.stock}</strong>
+            </div>
+
+            <div>
+              <span>Categoría</span>
+              <strong>{selectedProduct.category}</strong>
+            </div>
+
+            <div>
+              <span>Estado</span>
+              <strong className={selectedProduct.active ? "status-active" : "status-inactive"}>
+                {selectedProduct.active ? "Activo" : "Inactivo"}
+              </strong>
+            </div>
+
+          </div>
+
         </div>
       )}
 

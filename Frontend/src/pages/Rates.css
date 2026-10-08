@@ -1,0 +1,64 @@
+.rates-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.rate-form-card,
+.rates-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px #0000000d;
+}
+
+.rate-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.rate-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.rate-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  align-items: center;
+
+  padding: 18px 8px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.rate-players {
+  font-weight: 600;
+  color: #17243a;
+}
+
+.rate-players::before {
+  content: "Jugadores: ";
+  color: #64748b;
+  font-weight: 400;
+}
+
+.rate-precio {
+  font-weight: 700;
+  color: #17243a;
+}
+
+.rate-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.rate-actions button {
+  padding: 7px 11px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}

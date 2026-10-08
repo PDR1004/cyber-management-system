@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react"
+import "./Rates.css"
 
 
 function Rates() {
@@ -97,9 +98,9 @@ const createRate = (e) => {
         if (!response.ok){
           throw new Error ("No se pudo eliminar la tarifa")
         }
-        return response.json
+        return response.json()
       })
-      .then(data => {
+      .then(() => {
         setRates(
           rates.filter(rate => rate.id !== id)
         )
@@ -110,49 +111,70 @@ const createRate = (e) => {
   }
 
   return (
-    <div>
-      <h1>Tarifas</h1>
+    <div className = "rates-page">
+      
+      <div className ="page-header">
+        <h1>Tarifas</h1>
+      </div>
 
-      <form onSubmit={editingRate ? updateRate : createRate}>
-        <input
-          type="text"
-          placeholder="Cantidad de Jugadores"
-          value={players}
-          onChange={(e) => setPlayers(e.target.value)}
-        />
+      <div className = "rate-form-card">
+        <form onSubmit={editingRate ? updateRate : createRate} className = "rate-form">
 
-        <input
-          type="text"
-          placeholder="Precio por Hora"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-
-        <button type="submit">
-          {editingRate ? "Guardar Cambios" : "Crear Tarifa"}
-        </button>
-      </form>
-
-      <div>
-        {rates.map(rate =>(
-          <div key={rate.id}>
-            <p>
-              Jugadores: {rate.players_count} 
-            </p>
-            <p>
-              Precio por Hora: ${rate.price_per_hour}
-            </p>
-
-            <button onClick={() => editRate(rate)}>
-              Editar
-            </button>
-
-            <button onClick={() => deleteRate(rate.id)}>
-              Eliminar
-            </button>
-
+          <div className="form-group">
+            <label>Cantidad de Jugadores</label>
+            <input
+              type="number"
+              placeholder="Ej: 2"
+              value={players}
+              onChange={(e) => setPlayers(e.target.value)}
+            />
           </div>
-        ))}
+
+          <div className="form-group">
+            <label>Precio por Hora</label>
+            <input
+              type="number"
+              placeholder="Ej: 5000"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+
+          <button type="submit" className = "btn-primary">
+            {editingRate ? "Guardar Cambios" : "Crear Tarifa"}
+          </button>
+        </form>
+      </div>
+
+      <div className = "rates-card">
+        <div className="section-header">
+          <h2>Tarifas registradas</h2>
+          <span>{rates.length} tarifas</span>
+        </div>
+
+        <div className = "rate-list">
+          {rates.map(rate =>(
+            <div className = "rate-row" key={rate.id}>
+              
+              <div className= "rate-players">
+                {rate.players_count} 
+              </div>
+              <div className = "rate-precio">
+                ${rate.price_per_hour}
+              </div>
+
+              <div className = "rate-actions">
+                <button className = "btn-edit" onClick={() => editRate(rate)}>
+                  Editar
+                </button>
+
+                <button className = "btn-delete" onClick={() => deleteRate(rate.id)}>
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
