@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react"
+import "./Sessions.css"
 
 function Sessions() {
   const [consoles, setConsoles] = useState([])
@@ -7,6 +8,8 @@ function Sessions() {
   const [activeSessions, setActiveSessions] = useState([])
   const [sessions, setSessions] = useState([])
   const [message, setMessage] = useState("")
+  const [sessionFilter, setSessionFilter] = useState("today")
+  const [selectedSessionDate, setSelectedSessionDate] = useState("")
 
   useEffect(() => {
     fetch("http://localhost:8000/consoles/")
@@ -114,11 +117,52 @@ function Sessions() {
     }).format(price)
   }
 
-  return (
-    <div>
+  const getDateKey = (date) => {
+    const parsedDate = new Date(date)
+
+    const year = parsedDate.getFullYear()
+    const month = String(parsedDate.getMonth() + 1).padStart(2, "0")
+    const day = String(parsedDate.getDate()).padStart(2, "0")
+
+    return `${year}-${month}-${day}`
+  }
+
+  const today = getDateKey(new Date())
+
+  const filteredSessions = sessions
+    .filter(session => {
+      //Descartar sesiones activas
+      if (session.active !== false) {
+        return false
+      }
+      // Aplicar filtros de fecha para las sesiones finalizadas
+      if (sessionFilter === "today") {
+        return getDateKey(session.start_time) === today
+      }
+
+      if (sessionFilter === "date") {
+        return selectedSessionDate !== "" &&
+          getDateKey(session.start_time) === selectedSessionDate
+      }
+      return true
+    })
+    .sort(
+      (a, b) => new Date(b.start_time) - new Date(a.start_time)
+    )
+
+return (
+  <div className="sessions-page">
+    <div className="sessions-header">
       <h1>Sesiones</h1>
-      <p>Iniciar Sesion</p>
+      <p>Administrá las sesiones de las consolas del cyber</p>
+    </div>
+
+    <div className="session-form-card">
+      <div className="section-header">
+        <h2>Iniciar sesión</h2>
+      </div>
       <select
+        className="session-select"
         value={selectedConsole}
         onChange={(e) => setSelectedConsole(e.target.value)}
       >
@@ -137,35 +181,105 @@ function Sessions() {
           ))}
       </select>
       <input
-        type="text"
-        placeholder="Cantidad de Jugadores"
+        className="session-input"
+        type="number"
+        min="1"
+        max="2"
+        placeholder="Cantidad de jugadores"
         value={players}
         onChange={(e) => setPlayers(e.target.value)}
       />
-      <button onClick={startSession}>
-        Iniciar
+      <button className="btn-primary" onClick={startSession}>
+        Iniciar sesión
       </button>
-      
-      {message && <p>{message}</p>}
+    </div>
+    
+    {message && (
+      <div className="session-message">
+        {message}
+      </div>
+    )}
 
-      <h2>Sesiones Activas</h2>
-      <div>
+    <div className="active-sessions-card">
+      <div className="section-header">
+        <h2>Sesiones activas</h2>
+        <span>{activeSessions.length} activas</span>
+      </div>
+
+      <div className="active-sessions-list">
         {activeSessions.map(session => (
-          <div key={session.id}>
-            <p>Sesión: {session.id}</p>
-            <p>Consola: {consoles.find(console => console.id === session.console_id)?.name}</p>
-            <p>Jugadoes: {session.players_count}</p>
-            <p>Inicio: {formatDate(session.start_time)}</p>
+          <div className="active-session-row" key={session.id}>
+            <div className="active-session-info">
+              <h3>Sesión #{session.id}</h3>
 
-            <button onClick = {() => endSession(session.id)}>
-              Finalizar Sesión
-            </button>
+              <p>
+                Consola:{" "}
+                {consoles.find(
+                  console => console.id === session.console_id
+                )?.name}
+              </p>
+
+              <p>Jugadores: {session.players_count}</p>
+
+              <p>Inicio: {formatDate(session.start_time)}</p>
+            </div>
+
+            <div className="active-session-actions">
+              <span className="session-status-badge">
+                En curso
+              </span>
+
+              <button
+                className="btn-finish-session"
+                onClick={() => endSession(session.id)}
+              >
+                Finalizar sesión
+              </button>
+            </div>
           </div>
         ))}
       </div>
 
-      <table>
-        <caption>Sesiones finalizadas</caption>
+      {activeSessions.length === 0 && (
+        <p className="empty-sessions">
+          No hay sesiones activas en este momento.
+        </p>
+      )}
+    </div>
+
+    <div className="sales-filters">
+      <label htmlFor="sales-filter">
+        Mostrar Sesiones:
+      </label>
+
+      <select
+        id="sales-filter"
+        value={sessionFilter}
+        onChange={(e) => setSessionFilter(e.target.value)}
+      >
+        <option value="today">Sesiones de hoy</option>
+        <option value="all">Todas las sesiones</option>
+        <option value="date">Elegir una fecha</option>
+      </select>
+
+      {sessionFilter === "date" && (
+        <input
+          type="date"
+          value={selectedSessionDate}
+          onChange={(e) => setSelectedSessionDate(e.target.value)}
+        />
+      )}
+    </div> 
+
+    <div className="finished-sessions-card">
+      <div className="section-header">
+        <h2>Historial de sesiones</h2>
+        <span>
+          {filteredSessions.length} finalizadas
+        </span>
+      </div>
+
+      <table className="sessions-table">
         <thead>
           <tr>
             <th>Sesión</th>
@@ -177,7 +291,7 @@ function Sessions() {
           </tr>
         </thead>
         <tbody>
-          {sessions
+          {filteredSessions
           .filter(session => session.active === false)
           .map(session => (
           <tr key={session.id}>
@@ -191,8 +305,8 @@ function Sessions() {
           ))}
         </tbody>
       </table>
-
     </div>
+  </div>
   )
 }
 

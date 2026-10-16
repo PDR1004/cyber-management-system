@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import "./Sales.css"
 
 function Sales() {
 
@@ -9,6 +10,8 @@ function Sales() {
   const [message, setMessage] = useState("")
   const [sales, setSales] = useState([])
   const [selectedSale, setSelectedSale] = useState(null)
+  const [salesFilter, setSalesFilter] = useState("today")
+  const [selectedDate, setSelectedDate] = useState("")
   
 
   useEffect(() => {
@@ -147,6 +150,42 @@ function Sales() {
     })
   }
 
+  const getDateKey = (date) => {
+    const parsedDate = new Date(date)
+
+    const year = parsedDate.getFullYear()
+    const month = String(parsedDate.getMonth() + 1).padStart(2, "0")
+    const day = String(parsedDate.getDate()).padStart(2, "0")
+
+    return `${year}-${month}-${day}`
+  }
+
+  const today = getDateKey(new Date())
+
+  const filteredSales = sales
+    .filter(sale => {
+      if (salesFilter === "today") {
+        return getDateKey(sale.sale_date) === today
+      }
+
+      if (salesFilter === "date") {
+        return selectedDate !== "" &&
+          getDateKey(sale.sale_date) === selectedDate
+      }
+
+      return true
+    })
+    .sort(
+      (a, b) => new Date(b.sale_date) - new Date(a.sale_date)
+    )
+  
+  const totalSales = filteredSales.length
+
+  const totalRevenue = filteredSales.reduce(
+    (total,sale) => total + Number(sale.total),
+    0
+  )
+
   return (
     <div className = "sales-page">
       <div className = "page-header">
@@ -156,35 +195,41 @@ function Sales() {
 
       {message && <p>{message}</p>}
 
-      <select
-        value={selectedProduct}
-        onChange={(e) => setSelectedProduct(e.target.value)}
-      >
-        <option value="">
-          Seleccionar producto
-        </option>
-
-        {products.map(product => (
-          <option
-            key={product.id}
-            value={product.id}
-          >
-            {product.name}
+      <div className = "sale-form">
+        <select
+          className = "sales-select"
+          value={selectedProduct}
+          onChange={(e) => setSelectedProduct(e.target.value)}
+        >
+          <option value="">
+            Seleccionar producto
           </option>
-        ))}
-      </select>
 
-    <input
-        type="number"
-        min="1"
-        placeholder="Cantidad"
-        value={quantity}
-        onChange={(e) => setQuantity(e.target.value)}
-      />
+          {products.map(product => (
+            <option
+              key={product.id}
+              value={product.id}
+            >
+              {product.name}
+            </option>
+          ))}
+        </select>
+        <input
+          className = "sales-input"
+          type="number"
+          min="1"
+          placeholder="Cantidad"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+        />
 
-      <button onClick={addProduct}>
-        Agregar
-      </button>
+        <button 
+          className = "btn-primary" 
+          onClick={addProduct}
+        >
+          Agregar
+        </button>
+      </div>
 
       <div className = "items-card">
         <div className = "section-header">
@@ -215,6 +260,7 @@ function Sales() {
             </div>
           ))}
         </div>
+
         <p>
           Total: $ 
           {saleItems.reduce(
@@ -222,29 +268,74 @@ function Sales() {
             0
           )} 
         </p>
-        <button onClick={createSale}>
+        <button
+          className = "btn-finish-sale"
+          onClick={createSale}
+        >
           Finalizar Venta
         </button>
-      </div>  
+      </div> 
 
-      <table>
+      <div className="sales-filters">
+        <label htmlFor="sales-filter">
+          Mostrar ventas:
+        </label>
+
+        <select
+          id="sales-filter"
+          value={salesFilter}
+          onChange={(e) => setSalesFilter(e.target.value)}
+        >
+          <option value="today">Ventas de hoy</option>
+          <option value="all">Todas las ventas</option>
+          <option value="date">Elegir una fecha</option>
+        </select>
+
+        {salesFilter === "date" && (
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          />
+        )}
+      </div> 
+      <div className="sales-summary">
+        <div className="summary-card">
+          <span className="summary-label">Cantidad de ventas</span>
+          <strong className="summary-value">{totalSales}</strong>
+        </div>
+
+        <div className="summary-card">
+          <span className="summary-label">Total recaudado</span>
+          <strong className="summary-value">
+            {totalRevenue.toLocaleString("es-AR", {
+              style: "currency",
+              currency: "ARS",
+              maximumFractionDigits: 2
+            })}
+          </strong>
+        </div>
+      </div>
+
+      <table className = "sales-table">
         <caption> Ventas </caption>
         <thead>
           <tr>
             <th>Venta</th>
             <th>Fecha</th>
             <th>Total</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {sales
+          {filteredSales
           .map(sale => (
           <tr key={sale.id}>
             <td>{sale.id}</td>
             <td>{formatDate(sale.sale_date)}</td>
             <td>${sale.total}</td>
             <td>
-              <button onClick={() => getSaleById(sale.id)}>
+              <button className = "btn-view" onClick={() => getSaleById(sale.id)}>
                 Ver Detalle
               </button>
             </td>
@@ -254,14 +345,14 @@ function Sales() {
       </table>
 
       {selectedSale && (
-        <div>
+        <div className = "sale-detail-card">
           <h2>Detalle de venta #{selectedSale.id}</h2>
 
           <p>
             Fecha: {formatDate(selectedSale.sale_date)}
           </p>
 
-          <table>
+          <table className = "sale-detail-table">
             <thead>
               <tr>
                 <th>Producto</th>

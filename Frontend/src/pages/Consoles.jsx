@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react"
+import "./Consoles.css"
 
 
 function Consoles() {
@@ -90,7 +91,7 @@ function Consoles() {
       if (!response.ok){
         throw new Error ("No se pudo eliminar la consola")
       }
-      return response.json
+      return response.json()
     })
     .then(data => {
       setConsoles(
@@ -103,37 +104,57 @@ function Consoles() {
   }
 
   return (
-    <div>
-      <h1>Consolas</h1>
+    <div className = "consoles-page">
+      <div className = "consoles-header">
+        <h1>Consolas</h1>
+      </div>
 
-      <form onSubmit={editingConsole ? updateConsole : createConsole}>
-        <input
-          type="text"
-          placeholder="Nombre Consola"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button type="submit">
-          {editingConsole ? "Guardar Cambios" : "Crear Consola"}
-        </button>
-      </form>
+      <div className = "console-form-card">
+        <form onSubmit={editingConsole ? updateConsole : createConsole} className = "console-form">
+          <input
+            type="text"
+            placeholder="Nombre Consola"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <button type="submit" className = "btn-primary">
+            {editingConsole ? "Guardar Cambios" : "Crear Consola"}
+          </button>
+        </form>
+      </div>
 
-      <div>
+      <div className = "consoles-card">
+        <div className="section-header">
+          <h2>Consolas registradas</h2>
+          <span>{consoles.length} consolas</span>
+        </div>
+
+        <div className = "consoles-list">
         {consoles.map(console => (
-          <div key = {console.id}>
-            <p> Nombre: {console.name}</p>
-            <p> Estado: {console.status}</p>
+          <div className = "console-row" key = {console.id}>
+            <div className = "console-name">
+              <p> {console.name}</p>
+            </div>
+            <div className="console-status">
+              <span
+                className={`status-badge status-${console.status.toLowerCase()}`}
+              >
+                {console.status}
+              </span>
+            </div>
 
-            <button onClick={() => editConsole(console)}>
-              Editar
-            </button>
+            <div className = "console-actions">
+              <button className = "btn-edit" onClick={() => editConsole(console)}>
+                Editar
+              </button>
 
-            <button onClick={() => deleteConsole(console.id)}>
-              Eliminar
-            </button>
+              <button className = "btn-delete" onClick={() => deleteConsole(console.id)}>
+                Eliminar
+              </button>
+            </div>
           </div>
-        )
-        )}
+        ))}
+        </div>
       </div>
 
     </div>

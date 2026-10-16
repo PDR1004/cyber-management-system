@@ -1,0 +1,277 @@
+/* Página de consolas */
+.consoles-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Encabezado */
+.consoles-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.consoles-header h1 {
+  margin: 0;
+  color: #111827;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* Formulario */
+.console-form-card {
+  padding: 24px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.console-form {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.console-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background-color: #ffffff;
+  color: #111827;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.console-form input::placeholder {
+  color: #9ca3af;
+}
+
+.console-form input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.console-form .btn-primary {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 7px;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.console-form .btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+/* Tarjeta de consolas registradas */
+.consoles-card {
+  padding: 24px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Encabezado de la lista */
+.consoles-card .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.consoles-card .section-header h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.consoles-card .section-header span {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Lista */
+.consoles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.console-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+  background-color: #ffffff;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.console-row:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* Nombre y estado */
+.console-name,
+.console-status {
+  min-width: 0;
+}
+
+.console-name {
+  flex: 0.5;
+}
+
+.console-status {
+  flex: 0 0 auto;
+}
+
+.console-name p,
+.console-status p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.console-name p {
+  color: #111827;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Estado de cada consola */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 11px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Indicador circular */
+.status-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+/* Disponible: verde */
+.status-disponible {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+/* Ocupada: azul */
+.status-ocupada {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* Inactivo: gris */
+.status-inactivo {
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+
+/* Botones de acciones */
+.console-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.console-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 768px) {
+  .consoles-page {
+    gap: 18px;
+  }
+
+  .console-form-card,
+  .consoles-card {
+    padding: 18px;
+  }
+
+  .console-row {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .console-name {
+    flex-basis: 45%;
+  }
+
+  .console-status {
+    flex: 1;
+  }
+
+  .console-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .consoles-header h1 {
+    font-size: 24px;
+  }
+
+  .console-form {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .console-form .btn-primary {
+    width: 100%;
+  }
+
+  .consoles-card .section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .console-name {
+    flex-basis: 100%;
+  }
+
+  .console-status {
+    flex-basis: 100%;
+  }
+}
