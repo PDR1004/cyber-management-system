@@ -111,7 +111,6 @@ function Sales() {
       if (!response.ok) {
         throw new Error("No se pudo crear la venta")
       }
-
       return response.json()
     })
     .then(data => {
