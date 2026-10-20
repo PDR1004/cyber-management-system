@@ -265,3 +265,49 @@
     align-self: stretch;
   }
 }
+
+
+/*Filtro*/
+.sessions-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.sessions-filters label {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sessions-filters select,
+.sessions-filters input[type="date"] {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #111827;
+  font-size: 14px;
+  outline: none;
+}
+
+.sessions-filters select:focus,
+.sessions-filters input[type="date"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+@media (max-width: 600px) {
+  .sessions-filters {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .sessions-filters select,
+  .sessions-filters input[type="date"] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

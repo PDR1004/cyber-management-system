@@ -150,6 +150,13 @@ function Sessions() {
       (a, b) => new Date(b.start_time) - new Date(a.start_time)
     )
 
+    const totalSessions = filteredSessions.length
+
+    const totalRevenue = filteredSessions.reduce(
+      (total, session) => total + Number(session.total_price || 0),
+      0
+    )
+
 return (
   <div className="sessions-page">
     <div className="sessions-header">
@@ -247,13 +254,13 @@ return (
       )}
     </div>
 
-    <div className="sales-filters">
-      <label htmlFor="sales-filter">
+    <div className="sessions-filters">
+      <label htmlFor="sessions-filters">
         Mostrar Sesiones:
       </label>
 
       <select
-        id="sales-filter"
+        id="sessions-filters"
         value={sessionFilter}
         onChange={(e) => setSessionFilter(e.target.value)}
       >
@@ -275,8 +282,28 @@ return (
       <div className="section-header">
         <h2>Historial de sesiones</h2>
         <span>
-          {filteredSessions.length} finalizadas
+          {totalSessions} finalizadas
         </span>
+      </div>
+
+      <div className="sales-summary">
+        <div className="summary-card">
+          <span className="summary-label">
+            Sesiones finalizadas
+          </span>
+          <strong className="summary-value">
+            {totalSessions}
+          </strong>
+        </div>
+
+        <div className="summary-card">
+          <span className="summary-label">
+            Total recaudado
+          </span>
+          <strong className="summary-value">
+            {formatPrice(totalRevenue)}
+          </strong>
+        </div>
       </div>
 
       <table className="sessions-table">
@@ -291,9 +318,7 @@ return (
           </tr>
         </thead>
         <tbody>
-          {filteredSessions
-          .filter(session => session.active === false)
-          .map(session => (
+          {filteredSessions.map(session => (
           <tr key={session.id}>
             <td>{session.id}</td>
             <td>{consoles.find(console => console.id === session.console_id)?.name}</td>
