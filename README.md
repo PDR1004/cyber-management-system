@@ -1,24 +1,24 @@
 # Cyber Management System 🚀
 
-This project is a full-stack application designed to manage products, consoles, sales, and sessions for a cyber cafe.
+Este proyecto es una aplicación full-stack diseñada para gestionar productos, consolas, ventas y sesiones de un cibercafé.
 
-## 📜 Table of Contents
+## 📜 Tabla de Contenidos
 
-- [🚀 Project Title & Badges](#-project-title--badges)
-- [📝 Description](#-description)
-- [📚 Table of Contents](#-table-of-contents)
-- [✨ Features](#-features)
-- [💻 Tech Stack](#-tech-stack)
-- [⚙️ Installation](#-installation)
-- [💡 Usage](#-usage)
-- [📁 Project Structure](#-project-structure)
-- [🔗 API Reference](#-api-reference)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-- [⭐ Important Links](#-important-links)
-- [📝 Footer](#-footer)
+- [🚀 Título del Proyecto e Insignias](#-título-del-proyecto-e-insignias)
+- [📝 Descripción](#-descripción)
+- [📚 Tabla de Contenidos](#-tabla-de-contenidos)
+- [✨ Características](#-características)
+- [💻 Tecnologías](#-tecnologías)
+- [⚙️ Instalación](#-instalación)
+- [💡 Uso](#-uso)
+- [📁 Estructura del Proyecto](#-estructura-del-proyecto)
+- [🔗 Referencia de la API](#-referencia-de-la-api)
+- [🤝 Contribución](#-contribución)
+- [📄 Licencia](#-licencia)
+- [⭐ Enlaces Importantes](#-enlaces-importantes)
+- [📝 Pie de página](#-pie-de-página)
 
-## 🚀 Project Title & Badges
+## 🚀 Título del Proyecto e Insignias
 
 ![JavaScript](https://img.shields.io/badge/javascript-ES6-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.x-blue.svg)
@@ -26,160 +26,160 @@ This project is a full-stack application designed to manage products, consoles, 
 ![React](https://img.shields.io/badge/React-19.x-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-N/A-informational)
 
-## 📝 Description
+## 📝 Descripción
 
-This application provides a comprehensive solution for managing a cyber cafe. It includes functionalities for:
+Esta aplicación proporciona una solución integral para la gestión de un cibercafé. Incluye funcionalidades para:
 
-- **Product Management:** Track inventory, purchase prices, sale prices, and stock levels.
-- **Console Management:** Monitor the status of gaming consoles (Available, Occupied, Inactive).
-- **Session Tracking:** Start and end gaming sessions, calculating duration and total price based on defined rates.
-- **Sales Management:** Record product sales, calculate totals, and view sales history.
-- **Rate Management:** Define hourly rates based on the number of players.
-- **Dashboard:** Visualize key metrics like total revenue, sales, and console occupancy.
+- **Gestión de Productos:** Seguimiento de inventario, precios de compra, precios de venta y niveles de stock.
+- **Gestión de Consolas:** Monitoreo del estado de las consolas de videojuegos (Disponible, Ocupada, Inactiva).
+- **Seguimiento de Sesiones:** Iniciar y finalizar sesiones de juego, calculando la duración y el precio total en base a tarifas definidas.
+- **Gestión de Ventas:** Registro de ventas de productos, cálculo de totales y visualización del historial de ventas.
+- **Gestión de Tarifas:** Definición de tarifas por hora según la cantidad de jugadores.
+- **Panel de Control (Dashboard):** Visualización de métricas clave como ingresos totales, ventas y ocupación de consolas.
 
-The system is composed of a FastAPI backend and a React frontend.
+El sistema está compuesto por un backend en FastAPI y un frontend en React.
 
-## ✨ Features
+## ✨ Características
 
-- **Product CRUD:** Create, Read, Update, and Delete products.
-- **Console Status Management:** Real-time tracking of console availability.
-- **Session Lifecycle Management:** Start, end, and track active and historical gaming sessions.
-- **Sales Recording:** Efficiently record product sales and generate receipts.
-- **Dynamic Pricing:** Rates are dynamically applied based on player count and session duration.
-- **Interactive Dashboard:** Visual representation of key business metrics.
-- **Responsive UI:** User-friendly interface built with React.
+- **CRUD de Productos:** Crear, Leer, Actualizar y Eliminar productos.
+- **Gestión del Estado de Consolas:** Seguimiento en tiempo real de la disponibilidad de las consolas.
+- **Gestión del Ciclo de Vida de las Sesiones:** Iniciar, finalizar y realizar un seguimiento de las sesiones de juego activas e históricas.
+- **Registro de Ventas:** Registrar eficientemente las ventas de productos y generar comprobantes.
+- **Precios Dinámicos:** Las tarifas se aplican dinámicamente según la cantidad de jugadores y la duración de la sesión.
+- **Dashboard Interactivo:** Representación visual de las métricas clave del negocio.
+- **Interfaz de Usuario Responsiva:** Interfaz amigable construida con React.
 
-## 💻 Tech Stack
+## 💻 Tecnologías
 
 - **Backend:**
-  - **Language:** Python
+  - **Lenguaje:** Python
   - **Framework:** FastAPI
-  - **Database ORM:** SQLAlchemy
-  - **Database Driver:** psycopg2-binary (for PostgreSQL)
-  - **Other Libraries:** pydantic, python-dotenv, alembic
+  - **ORM de Base de Datos:** SQLAlchemy
+  - **Driver de Base de Datos:** psycopg2-binary (para PostgreSQL)
+  - **Otras Librerías:** pydantic, python-dotenv, alembic
 
 - **Frontend:**
-  - **Library:** React
+  - **Librería:** React
   - **Framework:** Vite
-  - **Routing:** React Router DOM
-  - **UI Components:** lucide-react (for icons)
-  - **Styling:** CSS
+  - **Enrutamiento:** React Router DOM
+  - **Componentes de UI:** lucide-react (para íconos)
+  - **Estilos:** CSS
   - **Linting:** ESLint
 
-## ⚙️ Installation
+## ⚙️ Instalación
 
 ### Backend (FastAPI)
 
-1.  **Clone the repository:**
+1.  **Clonar el repositorio:**
     ```bash
     git clone https://github.com/PDR1004/cyber-management-system.git
     cd cyber-management-system/Backend
     ```
 
-2.  **Create and activate a virtual environment:**
+2.  **Crear y activar un entorno virtual:**
     ```bash
     python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    source venv/bin/activate  # En Windows usa `venv\Scripts\activate`
     ```
 
-3.  **Install dependencies:**
+3.  **Instalar dependencias:**
     ```bash
     pip install -r requirements.txt
     ```
 
-4.  **Set up environment variables:**
-    Create a `.env` file in the `Backend` directory with your database connection URL:
+4.  **Configurar variables de entorno:**
+    Crea un archivo `.env` en el directorio `Backend` con tu URL de conexión a la base de datos:
     ```dotenv
-    DATABASE_URL=postgresql://user:password@host:port/database_name
+    DATABASE_URL=postgresql://usuario:contraseña@host:puerto/nombre_base_de_datos
     ```
 
-5.  **Run database migrations (if using Alembic):**
+5.  **Ejecutar migraciones de la base de datos (si usas Alembic):**
     ```bash
     alembic init alembic
-    # Configure alembic.ini and env.py for your database
+    # Configura alembic.ini y env.py para tu base de datos
     alembic revision --autogenerate -m "create tables"
     alembic upgrade head
     ```
-    *Note: The provided code directly creates tables using `Base.metadata.create_all(bind=engine)`. Alembic setup might be optional depending on the desired deployment strategy.* 
+    *Nota: El código proporcionado crea las tablas directamente usando `Base.metadata.create_all(bind=engine)`. La configuración de Alembic podría ser opcional dependiendo de la estrategia de despliegue deseada.* 
 
-6.  **Run the backend server:**
+6.  **Ejecutar el servidor backend:**
     ```bash
     uvicorn app.main:app --reload
     ```
 
 ### Frontend (React)
 
-1.  **Navigate to the frontend directory:**
+1.  **Navegar al directorio del frontend:**
     ```bash
     cd ../Frontend
     ```
 
-2.  **Install dependencies:**
+2.  **Instalar dependencias:**
     ```bash
     npm install
-    # or
+    # o
     yarn install
     ```
 
-3.  **Start the development server:**
+3.  **Iniciar el servidor de desarrollo:**
     ```bash
     npm run dev
-    # or
+    # o
     yarn dev
     ```
 
-## 💡 Usage
+## 💡 Uso
 
-This application is designed to streamline the operations of a cyber cafe. Here's how you can use its core functionalities:
+Esta aplicación está diseñada para optimizar las operaciones de un cibercafé. Así es como puedes usar sus funcionalidades principales:
 
-### Product Management 🛍️
+### Gestión de Productos 🛍️
 
--   Navigate to the **Products** section in the sidebar.
--   **Add New Products:** Fill in the form with product details (name, purchase price, sale price, stock, category) and click "Create Product".
--   **View Products:** A list of all active products is displayed.
--   **Edit Products:** Click the "Edit" button on a product row to modify its details.
--   **Delete Products:** Click the "Delete" button to mark a product as inactive.
--   **View Details:** Click "View" to see more specific information about a product.
+-   Navega a la sección de **Productos (Products)** en la barra lateral.
+-   **Añadir Nuevos Productos:** Completa el formulario con los detalles del producto (nombre, precio de compra, precio de venta, stock, categoría) y haz clic en "Crear Producto".
+-   **Ver Productos:** Se muestra una lista de todos los productos activos.
+-   **Editar Productos:** Haz clic en el botón "Editar" en la fila de un producto para modificar sus detalles.
+-   **Eliminar Productos:** Haz clic en el botón "Eliminar" para marcar un producto como inactivo.
+-   **Ver Detalles:** Haz clic en "Ver" para observar información más específica sobre un producto.
 
-### Console Management 🎮
+### Gestión de Consolas 🎮
 
--   Navigate to the **Consoles** section.
--   **Add Consoles:** Enter a console name and click "Create Console".
--   **View Consoles:** See a list of all consoles with their current status (Available, Occupied, Inactive).
--   **Edit Consoles:** Modify console names or their status.
--   **Delete Consoles:** Mark consoles as "Inactive" if they are no longer in use.
+-   Navega a la sección de **Consolas (Consoles)**.
+-   **Añadir Consolas:** Ingresa un nombre para la consola y haz clic en "Crear Consola".
+-   **Ver Consolas:** Observa una lista de todas las consolas con su estado actual (Disponible, Ocupada, Inactiva).
+-   **Editar Consolas:** Modifica los nombres de las consolas o su estado.
+-   **Eliminar Consolas:** Marca las consolas como "Inactivas" si ya no están en uso.
 
-### Session Management ⏱️
+### Gestión de Sesiones ⏱️
 
--   Navigate to the **Sessions** section.
--   **Start a Session:** Select an available console and enter the number of players. Click "Start Session". The console status will update to "Occupied".
--   **View Active Sessions:** See a list of currently running sessions with their start time.
--   **End a Session:** Click "End Session" for an active session. The system calculates the total price based on the defined rates and marks the console as "Available".
--   **View Session History:** Browse past sessions, filter by date, and see total revenue.
+-   Navega a la sección de **Sesiones (Sessions)**.
+-   **Iniciar una Sesión:** Selecciona una consola disponible e ingresa la cantidad de jugadores. Haz clic en "Iniciar Sesión". El estado de la consola se actualizará a "Ocupada".
+-   **Ver Sesiones Activas:** Observa una lista de las sesiones actualmente en curso con su hora de inicio.
+-   **Finalizar una Sesión:** Haz clic en "Finalizar Sesión" para una sesión activa. El sistema calcula el precio total según las tarifas definidas y marca la consola como "Disponible".
+-   **Ver Historial de Sesiones:** Explora sesiones pasadas, filtra por fecha y observa los ingresos totales.
 
-### Sales Management 💰
+### Gestión de Ventas 💰
 
--   Navigate to the **Sales** section.
--   **Create a Sale:** Select products from the dropdown, enter the quantity, and click "Add". The item will be added to the current sale.
--   **View Sale Details:** See the list of items and the running total for the current sale.
--   **Finalize Sale:** Click "Finalize Sale" to record the transaction. The stock of the products will be updated accordingly.
--   **View Sales History:** Browse past sales, filter by date, and view detailed receipts.
+-   Navega a la sección de **Ventas (Sales)**.
+-   **Crear una Venta:** Selecciona productos del menú desplegable, ingresa la cantidad y haz clic en "Añadir". El artículo se agregará a la venta actual.
+-   **Ver Detalles de la Venta:** Observa la lista de artículos y el total acumulado de la venta actual.
+-   **Finalizar Venta:** Haz clic en "Finalizar Venta" para registrar la transacción. El stock de los productos se actualizará en consecuencia.
+-   **Ver Historial de Ventas:** Explora ventas pasadas, filtra por fecha y ve recibos detallados.
 
-### Rate Management 💲
+### Gestión de Tarifas 💲
 
--   Navigate to the **Rates** section.
--   **Add Rates:** Define rates by specifying the number of players and the price per hour.
--   **View Rates:** See all defined rates.
--   **Edit/Delete Rates:** Modify or remove existing rates.
+-   Navega a la sección de **Tarifas (Rates)**.
+-   **Añadir Tarifas:** Define tarifas especificando la cantidad de jugadores y el precio por hora.
+-   **Ver Tarifas:** Observa todas las tarifas definidas.
+-   **Editar/Eliminar Tarifas:** Modifica o elimina tarifas existentes.
 
-### Dashboard 📊
+### Panel de Control (Dashboard) 📊
 
--   Navigate to the **Dashboard** section.
--   **Overview:** Get a summary of total revenue, product sales, session income, and current console occupancy.
--   **Period Selection:** Filter the displayed data by "Today", "Last 7 days", or "This month".
--   **Daily Revenue Chart:** Visualize daily revenue from products and sessions over the last 7 days.
+-   Navega a la sección del **Dashboard**.
+-   **Resumen:** Obtén un resumen de los ingresos totales, ventas de productos, ingresos por sesiones y la ocupación actual de consolas.
+-   **Selección de Período:** Filtra los datos mostrados por "Hoy", "Últimos 7 días" o "Este mes".
+-   **Gráfico de Ingresos Diarios:** Visualiza los ingresos diarios de productos y sesiones durante los últimos 7 días.
 
-## 📁 Project Structure
+## 📁 Estructura del Proyecto
 
 ```
 cyber-management-system/
@@ -220,11 +220,11 @@ cyber-management-system/
 │   │       ├── rate_service.py
 │   │       ├── sale_service.py
 │   │       └── session_service.py
-│   ├── migrations/ (Alembic migrations, if configured)
-│   ├── .env (Environment variables)
-│   ├── main.py (FastAPI app entry point)
-│   ├── requirements.txt (Backend dependencies)
-│   └── uvicorn_config.py (Uvicorn configuration, if any)
+│   ├── migrations/ (Migraciones de Alembic, si está configurado)
+│   ├── .env (Variables de entorno)
+│   ├── main.py (Punto de entrada de la app FastAPI)
+│   ├── requirements.txt (Dependencias del Backend)
+│   └── uvicorn_config.py (Configuración de Uvicorn, si aplica)
 │
 └── Frontend/
     ├── public/
@@ -252,79 +252,79 @@ cyber-management-system/
     │   ├── main.jsx
     │   ├── Layout.css
     │   └── Layout.jsx
-    ├── .eslintrc.cjs (ESLint configuration)
+    ├── .eslintrc.cjs (Configuración de ESLint)
     ├── index.html
     ├── package.json
     ├── vite.config.js
     └── README.md
 ```
 
-## 🔗 API Reference (Backend)
+## 🔗 Referencia de la API (Backend)
 
-The backend is built using FastAPI, exposing RESTful API endpoints for all major functionalities.
+El backend está construido usando FastAPI, exponiendo endpoints de API RESTful para todas las funcionalidades principales.
 
--   **`/products`**
-    -   `POST /`: Create a new product.
-    -   `GET /`: Get all active products.
-    -   `GET /{product_id}`: Get a specific product by ID.
-    -   `PUT /{product_id}`: Update a product.
-    -   `DELETE /{product_id}`: Deactivate a product.
+-   **`/products` (Productos)**
+    -   `POST /`: Crear un nuevo producto.
+    -   `GET /`: Obtener todos los productos activos.
+    -   `GET /{product_id}`: Obtener un producto específico por su ID.
+    -   `PUT /{product_id}`: Actualizar un producto.
+    -   `DELETE /{product_id}`: Desactivar un producto.
 
--   **`/consoles`**
-    -   `POST /`: Create a new console.
-    -   `GET /`: Get all available and occupied consoles.
-    -   `GET /{console_id}`: Get a specific console by ID.
-    -   `PUT /{console_id}`: Update a console's name or status.
-    -   `DELETE /{console_id}`: Mark a console as inactive.
+-   **`/consoles` (Consolas)**
+    -   `POST /`: Crear una nueva consola.
+    -   `GET /`: Obtener todas las consolas disponibles y ocupadas.
+    -   `GET /{console_id}`: Obtener una consola específica por su ID.
+    -   `PUT /{console_id}`: Actualizar el nombre o estado de una consola.
+    -   `DELETE /{console_id}`: Marcar una consola como inactiva.
 
--   **`/rates`**
-    -   `POST /`: Create a new rate.
-    -   `GET /`: Get all active rates.
-    -   `GET /{rate_id}`: Get a specific rate by ID.
-    -   `PUT /{rate_id}`: Update a rate.
-    -   `DELETE /{rate_id}`: Mark a rate as inactive.
+-   **`/rates` (Tarifas)**
+    -   `POST /`: Crear una nueva tarifa.
+    -   `GET /`: Obtener todas las tarifas activas.
+    -   `GET /{rate_id}`: Obtener una tarifa específica por su ID.
+    -   `PUT /{rate_id}`: Actualizar una tarifa.
+    -   `DELETE /{rate_id}`: Marcar una tarifa como inactiva.
 
--   **`/sessions`**
-    -   `POST /start`: Start a new session.
-    -   `POST /{session_id}/end`: End an active session and calculate total price.
-    -   `GET /`: Get all sessions (active and finished).
-    -   `GET /active/`: Get only active sessions.
+-   **`/sessions` (Sesiones)**
+    -   `POST /start`: Iniciar una nueva sesión.
+    -   `POST /{session_id}/end`: Finalizar una sesión activa y calcular el precio total.
+    -   `GET /`: Obtener todas las sesiones (activas y finalizadas).
+    -   `GET /active/`: Obtener solo las sesiones activas.
 
--   **`/sales`**
-    -   `POST /`: Create a new sale with products and quantities.
-    -   `GET /`: Get all sales.
-    -   `GET /{sale_id}`: Get a specific sale by ID, including details.
+-   **`/sales` (Ventas)**
+    -   `POST /`: Crear una nueva venta con productos y cantidades.
+    -   `GET /`: Obtener todas las ventas.
+    -   `GET /{sale_id}`: Obtener una venta específica por su ID, incluyendo detalles.
 
-*For detailed request and response schemas, please refer to the Pydantic models in the `Backend/app/schemas/` directory.*
+*Para ver esquemas detallados de solicitudes y respuestas, consulta los modelos Pydantic en el directorio `Backend/app/schemas/`.*
 
-## 🤝 Contributing
+## 🤝 Contribución
 
-Contributions are welcome! Please feel free to:
+¡Las contribuciones son bienvenidas! Por favor, siéntete libre de:
 
--   Fork the repository.
--   Create a new branch for your feature (`git checkout -b feature/AmazingFeature`).
--   Commit your changes (`git commit -m 'Add some AmazingFeature'`).
--   Push to the branch (`git push origin feature/AmazingFeature`).
--   Open a Pull Request.
+-   Hacer un fork del repositorio.
+-   Crear una nueva rama para tu característica (`git checkout -b feature/CaracteristicaIncreible`).
+-   Hacer un commit de tus cambios (`git commit -m 'Añadir alguna CaracteristicaIncreible'`).
+-   Hacer push a la rama (`git push origin feature/CaracteristicaIncreible`).
+-   Abrir un Pull Request.
 
-## 📄 License
+## 📄 Licencia
 
-This project is not currently under any specified license.
+Este proyecto no se encuentra actualmente bajo ninguna licencia especificada.
 
-## ⭐ Important Links
+## ⭐ Enlaces Importantes
 
--   **Live Demo:** (Not available)
--   **Repository:** [https://github.com/PDR1004/cyber-management-system](https://github.com/PDR1004/cyber-management-system)
+-   **Demo en vivo:** (No disponible)
+-   **Repositorio:** [https://github.com/PDR1004/cyber-management-system](https://github.com/PDR1004/cyber-management-system)
 
-## 📝 Footer
+## 📝 Pie de página
 
-© 2024 PDR1004. All rights reserved.
+© 2024 PDR1004. Todos los derechos reservados.
 
-Repository: [cyber-management-system](https://github.com/PDR1004/cyber-management-system)
-Author: PDR1004
-Contact: [pdr1004@example.com](mailto:pdr1004@example.com)
+Repositorio: [cyber-management-system](https://github.com/PDR1004/cyber-management-system)
+Autor: PDR1004
+Contacto: [pdr1004@example.com](mailto:pdr1004@example.com)
 
-**Love this project?** Star ⭐ | Fork 🍴 | Issue 🐛
+**¿Te gusta este proyecto?** Deja una estrella ⭐ | Haz un Fork 🍴 | Reporta un problema 🐛
 
 ---
-**<p align="center">Generated by [ReadmeCodeGen](https://www.readmecodegen.com/)</p>**
+**<p align="center">Generado por [ReadmeCodeGen](https://www.readmecodegen.com/)</p>**
